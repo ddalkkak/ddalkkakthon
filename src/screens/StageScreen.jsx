@@ -35,7 +35,7 @@ export default function StageScreen({
     return (
       <div className={`${styles.wrap} screen-enter`}>
         <Header />
-        <ShellGame name={name} onComplete={onCompleteShellGame} />
+        <ShellGame onComplete={onCompleteShellGame} />
       </div>
     );
   }
@@ -66,7 +66,7 @@ export default function StageScreen({
         <main className={styles.body}>
           <div className={styles.resultRow}>
             <div className={styles.charBox}>
-              <BadKing {...kingProps} mouthStyle="open" size={120} />
+              <BadKing {...kingProps} mouthStyle="open" size={144} />
             </div>
             <div className={styles.resultCard}>
               <div className={styles.resultLabel}>▶ 결과</div>
@@ -87,7 +87,7 @@ export default function StageScreen({
       <main className={styles.body}>
         <div className={styles.eventRow}>
           <div className={styles.charBox}>
-            <BadKing {...kingProps} size={120} />
+            <BadKing {...kingProps} size={144} />
           </div>
           <div className={styles.eventBox}>
             <p className={styles.eventText}>{event.desc}</p>

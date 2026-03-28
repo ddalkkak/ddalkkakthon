@@ -29,7 +29,7 @@ const WEIRD_OPTIONS = {
   ],
 };
 
-const ITEM_W = 110; // px
+const ITEM_W = 132; // px (reel cell width; keep in sync with SurgeryGame.module.css .reelItem)
 
 function buildReel(key) {
   // 일반 옵션 + 이상한 옵션 섞기
@@ -132,7 +132,7 @@ export default function SurgeryGame({ onComplete }) {
         <div className={styles.resultBox}>
           <div className={styles.resultTitle}>성형 완료!</div>
           <div className={styles.kingPreview}>
-            <BadKing eyeStyle={face.eyes} noseStyle={face.nose} mouthStyle={face.mouth} size={160} />
+            <BadKing eyeStyle={face.eyes} noseStyle={face.nose} mouthStyle={face.mouth} size={192} />
           </div>
           <p className={styles.resultComment}>독특한 비주얼이 탄생했습니다.</p>
           <div className={styles.faceLabels}>
@@ -169,7 +169,7 @@ export default function SurgeryGame({ onComplete }) {
       <div className={styles.previewCol}>
         <div className={styles.previewLabel}>현재 왕</div>
         <div className={styles.preview}>
-          <BadKing eyeStyle={previewFace.eyes} noseStyle={previewFace.nose} mouthStyle={previewFace.mouth} size={130} />
+          <BadKing eyeStyle={previewFace.eyes} noseStyle={previewFace.nose} mouthStyle={previewFace.mouth} size={156} />
         </div>
       </div>
 

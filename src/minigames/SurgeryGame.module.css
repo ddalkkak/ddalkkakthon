@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 16px 40px;
-  gap: 20px;
+  padding: 24px clamp(12px, 2.5vw, 28px) 48px;
+  gap: 22px;
   min-height: 60vh;
   background: #ffffff;
   width: 100%;
@@ -45,7 +45,7 @@
 /* ── 슬롯머신 영역 */
 .slotSection {
   width: 100%;
-  max-width: 600px;
+  max-width: min(780px, 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +67,7 @@
   box-shadow: 4px 4px 0 0 #000;
   background: #f0f0f0;
   position: relative;
-  height: 90px;
+  height: 108px;
 }
 
 /* gradient fade on sides */
@@ -77,7 +77,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 60px;
+  width: 72px;
   z-index: 2;
   pointer-events: none;
 }
@@ -93,8 +93,8 @@
 
 .reelItem {
   flex-shrink: 0;
-  width: 110px;
-  height: 80px;
+  width: 132px;
+  height: 96px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,7 +131,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 110px;
+  width: 132px;
   border: 3px solid #cc2200;
   pointer-events: none;
   z-index: 3;
@@ -194,8 +194,8 @@
   background: #f0f0f0;
   border: 4px solid #000000;
   box-shadow: 8px 8px 0 0 #000;
-  padding: 28px 24px;
-  max-width: 420px;
+  padding: 28px clamp(20px, 3vw, 32px);
+  max-width: min(540px, 100%);
   width: 100%;
   text-align: center;
   display: flex;

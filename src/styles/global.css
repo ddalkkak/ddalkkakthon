@@ -17,10 +17,22 @@
   --muted:  #555555;
   --green:  #008800;
   --px:     4px;
+  --app-pad-x: clamp(16px, 4vw, 40px);
+}
+
+/* Press Start 2P 유지, rem 기준 확대 (모바일~데스크톱) */
+html {
+  font-size: clamp(17px, 2.2vw + 12px, 22px);
 }
 
 html, body, #root {
   height: 100%;
+}
+
+#root {
+  max-width: 1180px;
+  margin-inline: auto;
+  width: 100%;
 }
 
 body {
@@ -29,6 +41,7 @@ body {
   color: #111111;
   min-height: 100vh;
   image-rendering: pixelated;
+  padding-inline: var(--app-pad-x);
 }
 
 button {
