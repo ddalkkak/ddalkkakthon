@@ -47,6 +47,14 @@ function reducer(state, action) {
     case "COMPLETE_RUNNER":
       return goNextStage({ ...state, score: state.score + (action.payload ?? 0) });
 
+    // 활쏘기 완료
+    case "COMPLETE_ARCHERY":
+      return goNextStage({ ...state, score: state.score + (action.payload ?? 0) });
+
+    // 궁문 탈출 완료
+    case "COMPLETE_PALACE":
+      return goNextStage({ ...state, score: state.score + (action.payload ?? 0) });
+
     // 선택지 선택
     case "CHOOSE": {
       const stage = STAGES[state.stageIdx];
@@ -99,6 +107,8 @@ export function useGameState() {
     completeShellGame: (wins)    => dispatch({ type: "COMPLETE_SHELLGAME", payload: wins }),
     completeSurgery:   (face)    => dispatch({ type: "COMPLETE_SURGERY", payload: face }),
     completeRunner:    (bonus)   => dispatch({ type: "COMPLETE_RUNNER",   payload: bonus }),
+    completeArchery:   (bonus)   => dispatch({ type: "COMPLETE_ARCHERY",  payload: bonus }),
+    completePalace:    (bonus)   => dispatch({ type: "COMPLETE_PALACE",   payload: bonus }),
     restart:           ()        => dispatch({ type: "RESTART" }),
   };
 }

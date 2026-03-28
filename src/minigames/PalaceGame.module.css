@@ -1,0 +1,236 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 32px;
+  width: 100%;
+}
+
+/* ── HUD */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 600px;
+  max-width: 100%;
+  padding: 0 4px;
+}
+
+.lives { display: flex; gap: 6px; }
+.lifeOn  { font-size: 1.4rem; color: #cc2200; text-shadow: 1px 1px 0 #000; }
+.lifeOff { font-size: 1.4rem; color: #cccccc; text-shadow: 1px 1px 0 #888; }
+
+.hudDesc {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.48rem;
+  color: #333;
+}
+
+/* ── 게임 영역 */
+.gameArea {
+  position: relative;
+  width: 600px;
+  height: 340px;
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  overflow: hidden;
+  /* 타일 바닥 배경 */
+  background:
+    repeating-linear-gradient(0deg,   rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 44px),
+    repeating-linear-gradient(90deg,  rgba(0,0,0,0.06) 0, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 44px),
+    #c8a87a;
+}
+
+/* ── 시작 구역 */
+.startZone {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 100px;
+  background: rgba(0,180,0,0.1);
+  border-right: 2px dashed #00aa00;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.4rem;
+  color: #00aa00;
+  pointer-events: none;
+}
+
+/* ── 궁문 벽 */
+.wallTop {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 48px;
+  height: 95px;          /* GATE_Y1 */
+  background: #333333;
+  border-left: 4px solid #000;
+  border-bottom: 4px solid #000;
+}
+.wallTop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 8px,
+    transparent 8px, transparent 16px
+  );
+}
+
+.wallBot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  height: 95px;          /* GH - GATE_Y2 = 340-245 */
+  background: #333333;
+  border-left: 4px solid #000;
+  border-top: 4px solid #000;
+}
+.wallBot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 8px,
+    transparent 8px, transparent 16px
+  );
+}
+
+/* ── 궁문 열린 구간 */
+.gateOpen {
+  position: absolute;
+  right: 0;
+  top: 95px;              /* GATE_Y1 */
+  width: 48px;
+  height: 150px;          /* GATE_Y2 - GATE_Y1 */
+  background: linear-gradient(to right, #ffe8a0, #fff5cc);
+  border-left: 4px solid #cc8800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: gateGlow 1.2s ease-in-out infinite;
+}
+@keyframes gateGlow {
+  0%, 100% { background: linear-gradient(to right, #ffe8a0, #fff5cc); }
+  50%       { background: linear-gradient(to right, #ffcc44, #ffe066); }
+}
+
+.gateLabel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.35rem;
+  color: #885500;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  letter-spacing: 0.2em;
+}
+
+/* ── 장애물 */
+.obstacle {
+  position: absolute;
+  border: 3px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+}
+
+.obsLabel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.27rem;
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.8);
+}
+
+/* ── 왕 */
+.king {
+  position: absolute;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.kingFlash {
+  animation: flash 0.12s steps(1) infinite;
+}
+@keyframes flash {
+  0%, 100% { opacity: 1;   }
+  50%       { opacity: 0.1; }
+}
+
+/* ── 오버레이 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 10;
+}
+
+.olTitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.05rem;
+  color: #ffcc00;
+  text-shadow: 3px 3px 0 #000;
+  animation: blink 0.7s steps(1) 4;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.olDesc {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.56rem;
+  color: #ffffff;
+  text-align: center;
+  line-height: 2.4;
+  white-space: pre-line;
+}
+
+.olHint {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.44rem;
+  color: #aaaaaa;
+}
+
+.olBtns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── 버튼 */
+.btnStart, .btnNext {
+  border: 3px solid #000;
+  padding: 12px 22px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+}
+.btnStart { background: #cc2200; color: #fff; }
+.btnNext  { background: #007700; color: #fff; }
+.btnStart:hover { background: #ff3300; transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #000; }
+.btnNext:hover  { background: #009900; transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #000; }
+.btnStart:active, .btnNext:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 #000; }
+
+/* ── 하단 힌트 */
+.hint {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.42rem;
+  color: #888888;
+  text-align: center;
+}

@@ -19,7 +19,7 @@ export default function App() {
     state,
     goCreate, setName, startGame,
     choose, nextEvent,
-    completeShellGame, completeSurgery, completeRunner,
+    completeShellGame, completeSurgery, completeRunner, completeArchery, completePalace,
     restart,
   } = useGameState();
 
@@ -47,6 +47,8 @@ export default function App() {
           onCompleteShellGame={completeShellGame}
           onCompleteSurgery={completeSurgery}
           onCompleteRunner={completeRunner}
+          onCompleteArchery={completeArchery}
+          onCompletePalace={completePalace}
         />
       );
     case "ending":

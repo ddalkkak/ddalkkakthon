@@ -94,15 +94,6 @@ export default function EndingScreen({ state, onRestart }) {
             </h2>
             <p className={styles.endingDesc}>{ending.desc}</p>
 
-            <div className={styles.faceRecord}>
-              <div className={styles.faceRecordTitle}>성형 기록</div>
-              <div className={styles.faceItems}>
-                <span>눈 · {eyesLabel}</span>
-                <span>코 · {noseLabel}</span>
-                <span>입 · {mouthLabel}</span>
-              </div>
-            </div>
-
             <button className={styles.restartBtn} onClick={onRestart}>
               처음으로 돌아가기
             </button>

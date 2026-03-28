@@ -3,10 +3,12 @@ import { BadKing } from "../art/BadKing";
 import ShellGame    from "../minigames/ShellGame";
 import SurgeryGame  from "../minigames/SurgeryGame";
 import RunnerGame   from "../minigames/RunnerGame";
+import ArcheryGame  from "../minigames/ArcheryGame";
+import PalaceGame   from "../minigames/PalaceGame";
 import styles from "./StageScreen.module.css";
 
 export default function StageScreen({
-  state, onChoose, onNextEvent, onCompleteShellGame, onCompleteSurgery, onCompleteRunner
+  state, onChoose, onNextEvent, onCompleteShellGame, onCompleteSurgery, onCompleteRunner, onCompleteArchery, onCompletePalace
 }) {
   const { name, face, stageIdx, eventIdx, lastChoiceResult } = state;
   const stage = STAGES[stageIdx];
@@ -47,6 +49,26 @@ export default function StageScreen({
       <div className={`${styles.wrap} screen-enter`}>
         <Header />
         <SurgeryGame onComplete={onCompleteSurgery} />
+      </div>
+    );
+  }
+
+  // ── 활쏘기
+  if (stage.type === "archery") {
+    return (
+      <div className={`${styles.wrap} screen-enter`}>
+        <Header />
+        <ArcheryGame face={face} onComplete={onCompleteArchery} />
+      </div>
+    );
+  }
+
+  // ── 궁문 탈출
+  if (stage.type === "palace") {
+    return (
+      <div className={`${styles.wrap} screen-enter`}>
+        <Header />
+        <PalaceGame face={face} onComplete={onCompletePalace} />
       </div>
     );
   }
