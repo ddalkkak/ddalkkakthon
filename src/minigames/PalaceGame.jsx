@@ -2,6 +2,71 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { BadKing } from "../art/BadKing";
 import styles from "./PalaceGame.module.css";
 
+// ── 장애물 SVG 모양 컴포넌트 ──────────────────────────
+function ObsSoldier({ bg, bd }) {
+  return (
+    <svg viewBox="0 0 52 52" width="100%" height="100%" style={{ display: "block" }}>
+      {/* 투구 */}
+      <rect x="15" y="2"  width="22" height="7" fill={bd} rx="2"/>
+      <rect x="12" y="7"  width="28" height="4" fill={bd}/>
+      {/* 머리 */}
+      <ellipse cx="26" cy="20" rx="11" ry="11" fill={bg} stroke={bd} strokeWidth="2"/>
+      {/* 눈 (픽셀) */}
+      <rect x="19" y="17" width="4" height="4" fill="#000"/>
+      <rect x="29" y="17" width="4" height="4" fill="#000"/>
+      {/* 갑옷 몸통 */}
+      <polygon points="10,51 18,32 34,32 42,51" fill={bg} stroke={bd} strokeWidth="2"/>
+      {/* 가슴 문양 */}
+      <rect x="23" y="36" width="6" height="9" fill={bd}/>
+      {/* 창 */}
+      <line x1="44" y1="2"  x2="44" y2="51" stroke="#aaaaaa" strokeWidth="3"/>
+      <polygon points="41,2 47,2 44,0" fill="#ddaa00"/>
+    </svg>
+  );
+}
+
+function ObsTraitor({ bg, bd }) {
+  return (
+    <svg viewBox="0 0 48 48" width="100%" height="100%" style={{ display: "block" }}>
+      {/* 다이아몬드 몸통 */}
+      <polygon points="24,3 45,24 24,45 3,24" fill={bg} stroke={bd} strokeWidth="3"/>
+      {/* 뿔 달린 관 */}
+      <polygon points="16,22 24,8  32,22" fill={bd}/>
+      <polygon points="13,20 17,12 21,20" fill={bd}/>
+      <polygon points="27,20 31,12 35,20" fill={bd}/>
+      {/* 날카로운 눈썹 */}
+      <line x1="14" y1="25" x2="21" y2="28" stroke="#fff" strokeWidth="2.5"/>
+      <line x1="27" y1="28" x2="34" y2="25" stroke="#fff" strokeWidth="2.5"/>
+      {/* 눈 */}
+      <circle cx="19" cy="30" r="3" fill="#fff"/>
+      <circle cx="29" cy="30" r="3" fill="#fff"/>
+      <circle cx="20" cy="31" r="1.5" fill="#000"/>
+      <circle cx="30" cy="31" r="1.5" fill="#000"/>
+      {/* 삐죽 웃음 */}
+      <polyline points="16,37 20,41 24,37 28,41 32,37" stroke="#fff" strokeWidth="2" fill="none"/>
+    </svg>
+  );
+}
+
+function ObsArrow({ bg, bd, dir }) {
+  // dir: 1=오른쪽, -1=왼쪽
+  return (
+    <svg viewBox="0 0 44 44" width="100%" height="100%"
+      style={{ display: "block", transform: dir < 0 ? "scaleX(-1)" : "none" }}>
+      {/* 화살대 */}
+      <rect x="4" y="19" width="26" height="6" fill={bg} stroke={bd} strokeWidth="2" rx="1"/>
+      {/* 화살촉 */}
+      <polygon points="30,11 42,22 30,33" fill={bg} stroke={bd} strokeWidth="2"/>
+      {/* 깃 (위) */}
+      <polygon points="4,19 14,12 14,19" fill="#cc4400"/>
+      {/* 깃 (아래) */}
+      <polygon points="4,25 14,32 14,25" fill="#cc4400"/>
+      {/* 오늬 */}
+      <rect x="2" y="20" width="4" height="4" fill={bd} rx="1"/>
+    </svg>
+  );
+}
+
 const GW      = 600;
 const GH      = 340;
 const KING_R  = 16;   // 충돌 반지름
@@ -203,16 +268,11 @@ export default function PalaceGame({ face, onComplete }) {
           <div
             key={o.id}
             className={styles.obstacle}
-            style={{
-              left:        o.x - o.r,
-              top:         o.y - o.r,
-              width:       o.r * 2,
-              height:      o.r * 2,
-              background:  o.bg,
-              borderColor: o.bd,
-            }}
+            style={{ left: o.x - o.r, top: o.y - o.r, width: o.r * 2, height: o.r * 2 }}
           >
-            <span className={styles.obsLabel}>{o.label}</span>
+            {o.label === "순찰병" && <ObsSoldier bg={o.bg} bd={o.bd} />}
+            {o.label === "간신"   && <ObsTraitor bg={o.bg} bd={o.bd} />}
+            {o.label === "화살"   && <ObsArrow   bg={o.bg} bd={o.bd} dir={Math.sign(o.vx || 1)} />}
           </div>
         ))}
 

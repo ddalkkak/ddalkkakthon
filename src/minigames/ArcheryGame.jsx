@@ -45,7 +45,7 @@ export default function ArcheryGame({ face, onComplete }) {
 
   // ── 과녁 이동 루프
   useEffect(() => {
-    if (phase !== "aiming" && phase !== "shooting") return;
+    if (phase !== "aiming") return;
     const cfg = ROUND_CFG[round];
     const t   = tRef.current;
     t.vy = cfg.speed * (t.vy >= 0 ? 1 : -1);

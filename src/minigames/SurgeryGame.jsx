@@ -29,7 +29,7 @@ const WEIRD_OPTIONS = {
   ],
 };
 
-const ITEM_W = 110; // px
+const ITEM_W = 132; // px  ← CSS .reelItem width 와 일치
 
 function buildReel(key) {
   // 일반 옵션 + 이상한 옵션 섞기
@@ -92,15 +92,8 @@ export default function SurgeryGame({ onComplete }) {
     const rawIdx = Math.round(-offsetRef.current / ITEM_W);
     const item = reel[Math.abs(rawIdx) % reel.length] ?? reel[0];
 
-    // 50% chance: if normal, override with weird
-    let finalItem = item;
-    const allWeird = WEIRD_OPTIONS[currentStep.key];
-    if (Math.random() < 0.5) {
-      finalItem = allWeird[Math.floor(Math.random() * allWeird.length)];
-    }
-
-    setPickedItem(finalItem);
-    setFace((f) => ({ ...f, [currentStep.key]: finalItem.id }));
+    setPickedItem(item);
+    setFace((f) => ({ ...f, [currentStep.key]: item.id }));
 
     // 스냅 오프셋 맞추기
     const snappedOffset = -rawIdx * ITEM_W;
@@ -135,11 +128,6 @@ export default function SurgeryGame({ onComplete }) {
             <BadKing eyeStyle={face.eyes} noseStyle={face.nose} mouthStyle={face.mouth} size={160} />
           </div>
           <p className={styles.resultComment}>독특한 비주얼이 탄생했습니다.</p>
-          <div className={styles.faceLabels}>
-            <span>눈: {eyeLabel}</span>
-            <span>코: {noseLabel}</span>
-            <span>입: {mouthLabel}</span>
-          </div>
           <button className={styles.nextBtn} onClick={() => onComplete(face)}>
             다음 단계로 ▶
           </button>
