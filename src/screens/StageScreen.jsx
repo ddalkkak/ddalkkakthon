@@ -1,20 +1,30 @@
 import { STAGES } from "../data/gameData";
 import { BadKing } from "../art/BadKing";
-import ShellGame    from "../minigames/ShellGame";
-import SurgeryGame  from "../minigames/SurgeryGame";
+import ShellGame from "../minigames/ShellGame";
+import SurgeryGame from "../minigames/SurgeryGame";
 import styles from "./StageScreen.module.css";
 
 export default function StageScreen({
-  state, onChoose, onNextEvent, onCompleteShellGame, onCompleteSurgery
+  state,
+  onChoose,
+  onNextEvent,
+  onCompleteShellGame,
+  onCompleteSurgery,
 }) {
   const { name, face, stageIdx, eventIdx, lastChoiceResult } = state;
   const stage = STAGES[stageIdx];
 
   // 공통 상단 헤더 (스탯바 없음)
   function Header() {
-    const totalEvents = STAGES.reduce((s, st) => s + (st.events?.length ?? 1), 0);
+    const totalEvents = STAGES.reduce(
+      (s, st) => s + (st.events?.length ?? 1),
+      0,
+    );
     const passedEvents =
-      STAGES.slice(0, stageIdx).reduce((s, st) => s + (st.events?.length ?? 1), 0) + eventIdx;
+      STAGES.slice(0, stageIdx).reduce(
+        (s, st) => s + (st.events?.length ?? 1),
+        0,
+      ) + eventIdx;
     const progress = Math.round((passedEvents / totalEvents) * 100);
     return (
       <header className={styles.header}>
@@ -24,7 +34,10 @@ export default function StageScreen({
           <span className={styles.charName}>{name}</span>
         </div>
         <div className={styles.progressBar}>
-          <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+          <div
+            className={styles.progressFill}
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </header>
     );
@@ -53,8 +66,8 @@ export default function StageScreen({
   // ── 일반 선택지
   const event = stage.events[eventIdx];
   const kingProps = {
-    eyeStyle:   face?.eyes  ?? "normal",
-    noseStyle:  face?.nose  ?? "normal",
+    eyeStyle: face?.eyes ?? "normal",
+    noseStyle: face?.nose ?? "normal",
     mouthStyle: face?.mouth ?? "angry",
   };
 
@@ -95,7 +108,11 @@ export default function StageScreen({
         </div>
         <div className={styles.choices}>
           {event.choices.map((choice, i) => (
-            <button key={i} className={styles.choiceBtn} onClick={() => onChoose(i)}>
+            <button
+              key={i}
+              className={styles.choiceBtn}
+              onClick={() => onChoose(i)}
+            >
               <span className={styles.choiceText}>{choice.text}</span>
             </button>
           ))}
