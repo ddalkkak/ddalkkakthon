@@ -1,16 +1,75 @@
-# React + Vite
+# 👑 KingMaker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **왕이 되기 위한 5단계의 험난한 여정**
 
-Currently, two official plugins are available:
+조선 시대를 배경으로 한 풍자 캐주얼 브라우저 게임.
+야바위, 성형, 달리기, 활쏘기, 궁문 탈출까지 — 5가지 미니게임을 클리어하고 왕위에 올라라.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**🎮 [지금 플레이하기 →](https://king-maker-two.vercel.app)**
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 게임 소개
 
-## Expanding the ESLint configuration
+플레이어는 총 5단계를 거쳐 왕위에 오릅니다.
+각 단계의 결과가 누적되어 마지막에 S+부터 C까지 **6가지 엔딩** 중 하나가 결정됩니다.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| 단계 | 제목 | 설명 |
+|------|------|------|
+| 1단계 | 충신? 간신? 야바위! | 세 명 중 충신을 맞혀라. 근데 다들 똑같이 생겼다. |
+| 2단계 | 왕 성형 클리닉 | 슬롯머신으로 왕의 눈·코·입을 고른다. 이후 단계 내내 반영된다. |
+| 3단계 | 왕의 사냥길 | 러너 게임. 신하들과 새를 피해 달려라. |
+| 4단계 | 왕의 활쏘기 | 움직이는 과녁에 화살을 쏜다. 3발 중 1발은 웨이브 화살. |
+| 5단계 | 궁문 탈출 | 마우스로 왕을 조종해 순찰병·간신·화살을 피해 궁문 도착. |
+
+### 엔딩 목록
+
+| 등급 | 엔딩 | 조건 |
+|------|------|------|
+| S+ | 성군 탄생 | 높은 점수 + 야바위 2승 이상 |
+| S | 철의 군주 | 높은 점수 |
+| A | 어쨌든 왕 | 중간 점수 |
+| B | 새벽의 왕 | 낮은 점수 |
+| C | 망한 왕 | 최저 점수 |
+
+---
+
+## 기술 스택
+
+```
+React 19 · Vite · React Router v6 · CSS Modules
+requestAnimationFrame 게임 루프 · 인라인 SVG 픽셀 아트
+Vercel 배포
+```
+
+- **상태 관리**: `useReducer` 단일 게임 스테이트 머신
+- **게임 루프**: `useRef` + `requestAnimationFrame` (리렌더링 부하 최소화)
+- **라우팅**: 단계별 URL 분리 (`/stage/1` ~ `/stage/5`)
+- **캐릭터**: 인라인 SVG 픽셀 아트 (성형 결과가 전 단계 반영)
+
+---
+
+## 로컬 실행
+
+```bash
+git clone https://github.com/ddalkkak/ddalkkakthon.git
+cd ddalkkakthon
+npm install
+npm run dev
+```
+
+---
+
+## AI 활용
+
+이 프로젝트는 **Claude (Anthropic)** 와 **Cursor** 를 사용해 제작했습니다.
+
+기획 의도를 자연어로 전달하면 미니게임 물리 로직, 충돌 감지, CSS 애니메이션, SVG 캐릭터까지
+실제 동작하는 코드로 구현했습니다. 비개발자도 AI와 함께라면 복잡한 인터랙티브 게임을 만들 수 있다는 것을 보여주는 프로젝트입니다.
+
+---
+
+## 링크
+
+- 🎮 배포: [king-maker-two.vercel.app](https://king-maker-two.vercel.app)
+- 🎬 데모 영상: [YouTube](https://youtu.be/bjZ3f9u8iiU)
