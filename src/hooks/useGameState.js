@@ -43,6 +43,10 @@ function reducer(state, action) {
     case "COMPLETE_SURGERY":
       return goNextStage({ ...state, face: action.payload });
 
+    // 사냥 완료
+    case "COMPLETE_RUNNER":
+      return goNextStage({ ...state, score: state.score + (action.payload ?? 0) });
+
     // 선택지 선택
     case "CHOOSE": {
       const stage = STAGES[state.stageIdx];
@@ -94,6 +98,7 @@ export function useGameState() {
     nextEvent:         ()        => dispatch({ type: "NEXT_EVENT" }),
     completeShellGame: (wins)    => dispatch({ type: "COMPLETE_SHELLGAME", payload: wins }),
     completeSurgery:   (face)    => dispatch({ type: "COMPLETE_SURGERY", payload: face }),
+    completeRunner:    (bonus)   => dispatch({ type: "COMPLETE_RUNNER",   payload: bonus }),
     restart:           ()        => dispatch({ type: "RESTART" }),
   };
 }
